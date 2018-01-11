@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="OrderedTest1" storage="c:\cases\ordered\orderedtests\orderedtests\orderedtest1.orderedtest" id="4718bbc3-a547-4f5b-ae60-3d1310cf48a2" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="6d6a6f5c-7da2-4a30-bf8e-f13b640748b6" name="msn" storage="msn.webtest" type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="29a32556-690b-4e59-a63e-51c8d66a8852" name="VisualStudio" storage="visualstudio.webtest" type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest,   PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>
