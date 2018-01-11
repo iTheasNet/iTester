@@ -1,0 +1,2467 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "_artifactsLocation": {
+      "type": "string",
+      "metadata": {
+        "description": "stroage location URI."
+      }
+    },
+    "_artifactsLocationSasToken": {
+      "type": "securestring",
+      "metadata": {
+        "description": "stroage location access token."
+      }
+    },
+    "AddinsApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyapiaddins',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony Addins application"
+      }
+    },
+    "AseName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the App Service Environment."
+      }
+    },
+    "AseResourceGroup": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Resource Group that the ASE is held."
+      }
+    },
+    "capacity": {
+      "type": "int",
+      "defaultValue": 1,
+      "metadata": {
+        "description": "Defines the number of instances that will be allocated to the app service plan."
+      }
+    },
+    "CertificateName": {
+      "type": "string",
+      "defaultValue": "ADCertSymphony",
+      "metadata": {
+        "description": "Name of the Active Directory Certificate in the Key Vault"
+      }
+    },
+    "CommandCenterApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyapicommandcenter',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony CommandCenter API application"
+      }
+    },
+    "CortexIntegrationApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'cortexintegrationapi',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Cortex Integration API"
+      }
+    },
+    "CXIApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'cxiapi',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Connect Integration API"
+      }
+    },
+    "CXIJobsApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'cxijobs',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Connect Integrations webjobs"
+      }
+    },
+    "DataResourceGroup": {
+      "type": "string",
+      "metadata": {
+        "description": "The resource group holding this environment's key vault."
+      }
+    },
+    "EnvironmentPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "The environment prefix."
+      }
+    },
+    "FilesApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyapifiles',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony files application"
+      }
+    },
+    "FuncAppName": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyfunc',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the function application service plan."
+      }
+    },
+    "ICApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyapiic',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Internal Controls API application"
+      }
+    },
+    "IISCentralLogStorage": {
+      "type": "string",
+      "metadata": {
+        "description": "The subscription central storage account to aggregate IIS logs."
+      }
+    },
+    "Location": {
+      "type": "string",
+      "defaultValue": "East US",
+      "metadata": {
+        "description": "The location of the ASE and ASP."
+      }
+    },
+    "MockIntegrationsApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyapiintegrations',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony mock integrations application"
+      }
+    },
+    "NodeApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyapinode',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony Node API application"
+      }
+    },
+    "NotificationsApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'), 'symphonyapinotifications',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony notifications application"
+      }
+    },
+    "pricingTier": {
+      "type": "string",
+      "allowedValues": [
+        "1",
+        "2",
+        "3"
+      ],
+      "defaultValue": "2",
+      "metadata": {
+        "description": "Defines pricing tier for workers: 1 = Isolated 1, 2 = Isolated 2, 3 = Isolated 3."
+      }
+    },
+    "ProjectOwner": {
+      "type": "string",
+      "metadata": {
+        "description": "The Owner of the environment. OPTIONAL. Only in use if used by different project."
+      }
+    },
+    "RecsApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyapirecs',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony Recs API application"
+      }
+    },
+    "RevealIntegrationApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'revealintegrationapi',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony Reveal Integration API"
+      }
+    },
+    "SymphonyWeb": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphony',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony web application."
+      }
+    },
+    "SymphonyApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyapi',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony api application"
+      }
+    },
+    "SymphonyApiName": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyapi',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony api application"
+      }
+    },
+    "SurveyApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyapisurvey',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony survey application"
+      }
+    },
+    "ServicePlanWeb": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyplanweb',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the Service Plan for Web applications"
+      }
+    },
+    "ServicePlanApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyplanapi',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the Service Plan for Api applications"
+      }
+    },
+    "ServicePlanFunc": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyplanfunc',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of function application service."
+      }
+    },
+    "ServicePlanJob": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyplanjob',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the Service Plan for WebJob applications"
+      }
+    },
+    "StoragePlan": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonystorage',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the Symphony Storage Plan for the environment"
+      }
+    },
+    "SymphonyXPIJobsApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyxpijobs',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the All Integrations webjobs"
+      }
+    },
+    "TypeaheadApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyapitypeahead',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony typeahead application"
+      }
+    },
+    "UserProfilesApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyapiuserprofiles',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony UserProfiles API application"
+      }
+    },
+    "VaultName": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyvault',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the SYMPHONY Key Vault for the environment"
+      }
+    },
+    "WebjobsApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyjobs',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony webjobs application"
+      }
+    },
+    "WEBSITE_LOAD_CERTIFICATES": {
+      "type": "string",
+      "metadata": {
+        "description": "Symphony AD certificate"
+      }
+    },
+    "WorkpapersApi": {
+      "type": "string",
+      "defaultValue": "[toLower(concat(parameters('EnvironmentPrefix'),'symphonyapiworkpapers',parameters('ProjectOwner')))]",
+      "metadata": {
+        "description": "Name of the application service for the Symphony workpapers application"
+      }
+    }
+  },
+
+  "resources": [
+    {
+      "type": "Microsoft.Web/certificates",
+      "name": "[parameters('CertificateName')]",
+      "apiVersion": "2016-03-01",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "keyVaultId": "[resourceId(parameters('DataResourceGroup'),'Microsoft.KeyVault/vaults', parameters('VaultName'))]",
+        "keyVaultSecretName": "[parameters('CertificateName')]"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ]
+    },
+    {
+      "name": "[parameters('ServicePlanWeb')]",
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2016-03-01",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('ServicePlanWeb')]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        }
+      },
+      "sku": {
+        "name": "[concat('I',parameters('pricingTier'))]",
+        "tier": "Isolated",
+        "size": "[concat('I',parameters('pricingTier'))]",
+        "family": "I",
+        "capacity": "[parameters('capacity')]"
+      }
+    },
+    {
+      "name": "[parameters('ServicePlanApi')]",
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2016-03-01",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('ServicePlanApi')]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        }
+      },
+      "sku": {
+        "name": "I3",
+        "tier": "Isolated",
+        "size": "I3",
+        "family": "I",
+        "capacity": "[parameters('capacity')]"
+      }
+    },
+    {
+      "name": "[parameters('ServicePlanJob')]",
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2016-03-01",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('ServicePlanJob')]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        }
+      },
+      "sku": {
+        "name": "[concat('I',parameters('pricingTier'))]",
+        "tier": "Isolated",
+        "size": "[concat('I',parameters('pricingTier'))]",
+        "family": "I",
+        "capacity": "[parameters('capacity')]"
+      }
+    },
+    {
+      "name": "[parameters('ServicePlanFunc')]",
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2016-03-01",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('ServicePlanFunc')]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        }
+      },
+      "sku": {
+        "name": "I2",
+        "tier": "Isolated",
+        "size": "I2",
+        "family": "I",
+        "capacity": "[parameters('capacity')]"
+      }
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('SymphonyWeb')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('SymphonyWeb')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms', parameters('ServicePlanWeb'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('ServicePlanWeb'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SymphonyWeb'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SymphonyWeb'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('SymphonyWeb'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SymphonyWeb'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('SymphonyWeb'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SymphonyWeb'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('SymphonyWeb'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('SymphonyApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('SymphonyApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SymphonyApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SymphonyApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('SymphonyApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SymphonyApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('SymphonyApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SymphonyApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('SymphonyApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('MockIntegrationsApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('MockIntegrationsApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('MockIntegrationsApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('MockIntegrationsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('MockIntegrationsApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('MockIntegrationsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('MockIntegrationsApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('MockIntegrationsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('MockIntegrationsApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('NotificationsApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('NotificationsApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('NotificationsApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('NotificationsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('NotificationsApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('NotificationsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('NotificationsApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('NotificationsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('NotificationsApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('SurveyApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('SurveyApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SurveyApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SurveyApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('SurveyApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SurveyApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('SurveyApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SurveyApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('SurveyApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('WorkpapersApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('WorkpapersApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('WorkpapersApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('WorkpapersApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('WorkpapersApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('WorkpapersApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('WorkpapersApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('WorkpapersApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('WorkpapersApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('TypeaheadApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('TypeaheadApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('TypeaheadApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('TypeaheadApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('TypeaheadApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('TypeaheadApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('TypeaheadApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('TypeaheadApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('TypeaheadApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('FilesApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('FilesApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('FilesApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('FilesApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('FilesApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('FilesApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('FilesApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('FilesApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('FilesApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('AddinsApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('AddinsApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('AddinsApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('AddinsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('AddinsApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('AddinsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('AddinsApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('AddinsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('AddinsApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('ICApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('ICApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('ICApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('ICApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('ICApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('ICApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('ICApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('ICApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('ICApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('NodeApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('NodeApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('NodeApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('NodeApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('NodeApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('NodeApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('NodeApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('NodeApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('NodeApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('WebjobsApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('WebjobsApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanJob'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanJob'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('WebjobsApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": true,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('WebjobsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('WebjobsApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('WebjobsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('WebjobsApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('WebjobsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('WebjobsApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('CommandCenterApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('CommandCenterApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CommandCenterApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CommandCenterApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('CommandCenterApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CommandCenterApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('CommandCenterApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CommandCenterApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('CommandCenterApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('RecsApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('RecsApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('RecsApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('RecsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('RecsApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('RecsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('RecsApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('RecsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('RecsApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('RevealIntegrationApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('RevealIntegrationApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('RevealIntegrationApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('RevealIntegrationApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('RevealIntegrationApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('RevealIntegrationApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('RevealIntegrationApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('RevealIntegrationApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('RevealIntegrationApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('UserProfilesApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('UserProfilesApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('UserProfilesApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('UserProfilesApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('UserProfilesApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('UserProfilesApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('UserProfilesApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('UserProfilesApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('UserProfilesApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('CXIApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('CXIApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CXIApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CXIApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('CXIApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CXIApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('CXIApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CXIApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('CXIApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('CXIJobsApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('CXIJobsApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanJob'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanJob'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CXIJobsApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CXIJobsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('CXIJobsApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CXIJobsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('CXIJobsApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CXIJobsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('CXIJobsApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('SymphonyXPIJobsApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('SymphonyXPIJobsApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanJob'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanJob'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SymphonyXPIJobsApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": true,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SymphonyXPIJobsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('SymphonyXPIJobsApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SymphonyXPIJobsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('SymphonyXPIJobsApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('SymphonyXPIJobsApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('SymphonyXPIJobsApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "kind": "functionapp",
+      "name": "[parameters('FuncAppName')]",
+      "tags": {
+      },
+      "apiVersion": "2015-08-01",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "name": "[parameters('FuncAppName')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms',parameters('ServicePlanFunc'))]",
+        "siteConfig": {
+          "alwaysOn": true
+        }
+      },
+      "resources": [
+        {
+          "apiVersion": "2015-08-01",
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', parameters('FuncAppName'))]"
+          ]
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('FuncAppName'))]"
+          ],
+          "tags": {
+            "displayName": "ApplicationSettings"
+          },
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "web",
+          "type": "config",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('FuncAppName'))]"
+          ],
+          "tags": {
+            "displayName": "GeneralSettings"
+          },
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('FuncAppName'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('FuncAppName'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Verbose",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        }
+      ],
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms',parameters('ServicePlanFunc'))]"
+      ]
+    },
+    {
+      "apiVersion": "2016-03-01",
+      "name": "[parameters('CortexIntegrationApi')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('Location')]",
+      "properties": {
+        "name": "[parameters('CortexIntegrationApi')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverFarms',parameters('ServicePlanApi'))]",
+        "hostingEnvironmentProfile": {
+          "id": "[resourceId(parameters('AseResourceGroup'),'Microsoft.Web/hostingEnvironments', parameters('AseName'))]"
+        },
+        "clientAffinityEnabled": false
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverFarms/',parameters('ServicePlanApi'))]"
+      ],
+      "resources": [
+        {
+          "apiVersion": "2016-03-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CortexIntegrationApi'))]"
+          ],
+          "properties": {
+            "use32BitWorkerProcess": false,
+            "alwaysOn": true
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CortexIntegrationApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('CortexIntegrationApi'), 'web')]"
+          ],
+          "properties": {
+            "NEWRELIC_HOME": "D:\\home\\site\\wwwroot\\newrelic",
+            "NEWRELIC_LICENSEKEY": "3f8e91c0cfec03d18b8b424ef8a98f482e0d49dd",
+            "COR_ENABLE_PROFILING": "1",
+            "COR_PROFILER": "{71DA0A04-7777-4EC6-9643-7D28B46A8A41}",
+            "COR_PROFILER_PATH": "D:\\home\\site\\wwwroot\\newrelic\\NewRelic.Profiler.dll",
+            "WEBSITE_LOAD_CERTIFICATES": "[parameters('WEBSITE_LOAD_CERTIFICATES')]",
+            "WEBSITE_NODE_DEFAULT_VERSION": "8.9.0"
+          }
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CortexIntegrationApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('CortexIntegrationApi'), 'appsettings')]"
+          ],
+          "properties": {
+            "applicationLogs": {
+              "fileSystem": {
+                "level": "Off"
+              },
+              "azureTableStorage": {
+                "level": "Off"
+              },
+              "azureBlobStorage": {
+                "level": "Error",
+                "sasUrl": "[concat('https://',parameters('StoragePlan'),'.blob.core.windows.net/logs')]",
+                "retentionInDays": 3
+              }
+            },
+            "httpLogs": {
+              "fileSystem": {
+                "enabled": false
+              },
+              "azureBlobStorage": {
+                "sasUrl": "[concat('https://',parameters('IISCentralLogStorage'),'.blob.core.windows.net/iislogs')]",
+                "retentionInDays": 180,
+                "enabled": true
+              }
+            },
+            "failedRequestsTracing": {
+              "enabled": false
+            },
+            "detailedErrorMessages": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "name": "NewRelic.Azure.WebSites",
+          "type": "siteextensions",
+          "apiVersion": "2016-03-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('CortexIntegrationApi'))]",
+            "[resourceId('Microsoft.Web/sites/config', parameters('CortexIntegrationApi'), 'logs')]"
+          ],
+          "properties": {}
+        }
+      ]
+    }
+  ]
+}
+  
