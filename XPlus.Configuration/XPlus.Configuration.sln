@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XPlus.Configuration", "XPlu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xplus.Configuration.App", "Xplus.Configuration.App\Xplus.Configuration.App.csproj", "{26D8746D-2419-4681-ADDB-65C17138E4C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XPlus.SDK.Library", "..\..\XPlus.SDK.Library\XPlus.SDK.Library.csproj", "{3F6E00DF-A7C7-4DAE-BEC5-40D3B26E8742}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,16 +21,12 @@ Global
 		{26D8746D-2419-4681-ADDB-65C17138E4C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26D8746D-2419-4681-ADDB-65C17138E4C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26D8746D-2419-4681-ADDB-65C17138E4C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3F6E00DF-A7C7-4DAE-BEC5-40D3B26E8742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F6E00DF-A7C7-4DAE-BEC5-40D3B26E8742}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F6E00DF-A7C7-4DAE-BEC5-40D3B26E8742}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F6E00DF-A7C7-4DAE-BEC5-40D3B26E8742}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://teodorasms.visualstudio.com/
 		SccLocalPath0 = .
@@ -41,8 +35,5 @@ Global
 		SccLocalPath1 = Xplus.Configuration.App
 		SccProjectUniqueName2 = XPlus.Configuration.csproj
 		SccLocalPath2 = .
-		SccProjectUniqueName3 = ..\\..\\XPlus.SDK.Library\\XPlus.SDK.Library.csproj
-		SccProjectName3 = XPlus.SDK.Library
-		SccLocalPath3 = ..\\..\\XPlus.SDK.Library
 	EndGlobalSection
 EndGlobal
