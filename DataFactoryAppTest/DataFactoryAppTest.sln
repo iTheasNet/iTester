@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3466B219-07DB-46AE-8697-CFD2A1650EC8}") = "DataFactoryAppTest", "DataFactoryAppTest\DataFactoryAppTest.dfproj", "{1049716A-1EA7-4921-8398-D37AE50B861D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1049716A-1EA7-4921-8398-D37AE50B861D}.Debug|x86.ActiveCfg = Debug|x86
+		{1049716A-1EA7-4921-8398-D37AE50B861D}.Debug|x86.Build.0 = Debug|x86
+		{1049716A-1EA7-4921-8398-D37AE50B861D}.Release|x86.ActiveCfg = Release|x86
+		{1049716A-1EA7-4921-8398-D37AE50B861D}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://teodorasms.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DataFactoryAppTest\\DataFactoryAppTest.dfproj
+		SccProjectName1 = DataFactoryAppTest
+		SccLocalPath1 = DataFactoryAppTest
+	EndGlobalSection
+EndGlobal
