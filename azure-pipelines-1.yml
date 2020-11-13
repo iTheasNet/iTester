@@ -1,0 +1,39 @@
+name: $(BuildDefinitionName)-$(SourceBranchName)-$(Date:yyyy.MM.dd)$(Rev:.rrr)
+trigger:
+  enabled: false
+resources:
+  pipelines:
+  - pipeline: CI
+    source: Common-WSODataStandard-TestBuild
+    trigger:
+      enabled: false
+variables:
+- name: PipelineResource
+  value: CI
+- name: BuildArtifact
+  value: NugetPackages
+stages:
+- stage: MainStage
+  pool:
+    name: AWS VS 2019
+  jobs:
+  - job: MainJob
+    steps:
+    - task: 30f35852-3f7e-4c0c-9a88-e127b4f97211@1
+      inputs:
+        alias: $(PipelineResource)
+        artifact: $(BuildArtifact)
+        patterns: '**/*.nupkg'
+    - task: NuGetToolInstaller@1
+      enabled: false
+    - task: NuGetCommand@2
+      enabled: false
+      inputs:
+        command: push
+        packagesToPush: $(PIPELINE.WORKSPACE)/$(PipelineResource)/$(BuildArtifact)/*.nupkg;!$(PIPELINE.WORKSPACE)/$(PipelineResource)/$(BuildArtifact)/*.symbols.nupkg
+        nuGetFeedType: internal
+        publishVstsFeed: d81cd6a3-81fa-4a7b-afce-05946f7eae24
+    - task: git-tag-on-release-task@9
+      enabled: false
+      inputs:
+        replacePattern: Published on NuGet Feed
