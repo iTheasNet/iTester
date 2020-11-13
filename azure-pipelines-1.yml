@@ -1,6 +1,5 @@
 name: $(BuildDefinitionName)-$(SourceBranchName)-$(Date:yyyy.MM.dd)$(Rev:.rrr)
-trigger:
-  enabled: false
+
 resources:
   pipelines:
   - pipeline: CI
