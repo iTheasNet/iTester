@@ -1,16 +1,25 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
+name: $(BuildDefinitionName)-$(SourceBranchName)-$(Date:yyyy.MM.dd)$(Rev:.rrr)
 trigger:
-- master
-
-pool:
-  vmImage: 'ubuntu-latest'
-
-steps:
-- task: 30f35852-3f7e-4c0c-9a88-e127b4f97211@1
+  enabled: false
+resources:
+  pipelines:
+  - pipeline: CI
+    source: Common-WSODataStandard-TestBuild
+    trigger:
+      enabled: false
+variables:
+- name: PipelineResource
+  value: CI
+- name: BuildArtifact
+  value: NugetPackages
+stages:
+- stage: MainStage
+  pool:
+    name: LocalS
+  jobs:
+  - job: MainJob
+    steps:
+    - task: 30f35852-3f7e-4c0c-9a88-e127b4f97211@1
       inputs:
         alias: $(PipelineResource)
         artifact: $(BuildArtifact)
