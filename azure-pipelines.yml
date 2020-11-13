@@ -1,6 +1,6 @@
 name: $(BuildDefinitionName)-$(SourceBranchName)-$(Date:yyyy.MM.dd)$(Rev:.rrr)
 trigger:
-  enabled: false
+ 
 resources:
   pipelines:
   - pipeline: CI
@@ -15,7 +15,7 @@ variables:
 stages:
 - stage: MainStage
   pool:
-    name: AWS VS 2019
+    name: LocalS
   jobs:
   - job: MainJob
     steps:
