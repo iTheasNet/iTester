@@ -8,7 +8,10 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-
+parameters:
+- name: doThing
+  default: true
+  type: boolean
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
