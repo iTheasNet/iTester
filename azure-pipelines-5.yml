@@ -10,8 +10,8 @@ pool:
   vmImage: 'ubuntu-latest'
 parameters:
 - name: doThing
-  default: true
-  type: boolean
+  default: 'WP'
+  type: string 
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
