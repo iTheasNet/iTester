@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<OrderedTest name="OrderedTest1" storage="c:\cases\loadtestresultsfolder\webandloadtestproject1\webandloadtestproject1\orderedtest1.orderedtest" id="347cfcb8-89a7-4f30-b32f-4c3d8ed2e076" continueAfterFailure="true" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
-  <TestLinks>
-    <TestLink id="5d007bfe-b62a-4514-b61d-4b1936bbc04e" name="WebTest1" storage="webtest1.webtest" type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest,   PublicKeyToken=b03f5f7f11d50a3a" />
-  </TestLinks>
-</OrderedTest>
