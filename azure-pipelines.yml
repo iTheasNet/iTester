@@ -5,7 +5,7 @@
 
 trigger:
 - master
-- second
+
 
 pool:
   vmImage: 'windows-latest'
