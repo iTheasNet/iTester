@@ -1,4 +1,0 @@
-$url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/builds/528?api-version=2.0"
-Write-Host "URL: $url"
-$definition = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
-Write-Host "Definition = $($definition | ConvertTo-Json -Depth 100)"
