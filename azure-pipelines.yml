@@ -5,6 +5,7 @@
 
 trigger:
 - master
+-feature_branch_changes
 
 pool:
   vmImage: 'windows-latest'
