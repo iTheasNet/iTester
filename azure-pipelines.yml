@@ -14,7 +14,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   major: 2
-  minor: 9
+  minor: 0
 stages:
 - stage:
   displayName: Build_Branch_Version_Number
