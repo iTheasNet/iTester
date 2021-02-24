@@ -8,6 +8,10 @@ trigger:
 
 pool:
   vmImage: 'windows-latest'
+variables:
+   major: 1
+   minor: 1
+name: $(major).$(minor)$(Rev:.r)
 
 variables:
   solution: '**/*.sln'
