@@ -21,16 +21,13 @@ stages:
 - stage: Two
   jobs:
   - deployment: B
-    environment:
-      name: $(ado_environment)
-    variables:
-    - name: varFromA
-      value: $[ stageDependencies.One.A.outputs['test.ado_environment'] ]
-    strategy:
+  displayName: deploy_to_env
+  pool:
+   vmImage: ubuntu-latest
+   environment: $(ado_environment)
+   strategy:
       runOnce:
         deploy:
           steps:
-          - task: CmdLine@2
-            inputs:
-              script: echo $(varFromA)
+          - script: echo Hello world
 
