@@ -24,10 +24,12 @@ stages:
   displayName: deploy_to_env
   pool:
    vmImage: ubuntu-latest
-   environment: 'ado_environment'
+   environment: 
+   name: 'Test'
    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - script: echo Hello world
-
+    # Default deployment strategy, more coming...
+    runOnce:
+      deploy:
+        steps:
+        - checkout: self 
+        - script: echo my first deployment
