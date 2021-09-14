@@ -17,6 +17,7 @@ stages:
           $ado_environment = "OneStream Tony Test Inc"
           Write-Output "##vso[task.setvariable variable=ado_environment;isOutput=true]$ado_environment"
           Write-Host "Environment is $ado_environment"
+          name: Teo
 - stage: Two
   jobs:
   - deployment: B
