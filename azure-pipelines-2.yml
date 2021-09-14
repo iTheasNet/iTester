@@ -2,13 +2,14 @@ trigger:
   branches:
     include:
     - master
-pool:
-  vmImage: ubuntu-latest
+
 stages:
 - stage: One
   jobs:
   - job: A
-    steps:
+  pool:
+   vmImage: ubuntu-latest
+  steps:
     - task: PowerShell@2
       name: test
       inputs:
