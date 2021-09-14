@@ -1,15 +1,14 @@
 trigger:
   branches:
     include:
-    - master
-
+    - Development
+pool:
+  vmImage: ubuntu-latest
 stages:
 - stage: One
   jobs:
   - job: A
-  pool:
-   vmImage: ubuntu-latest
-  steps:
+    steps:
     - task: PowerShell@2
       name: test
       inputs:
@@ -18,19 +17,19 @@ stages:
           $ado_environment = "OneStream Tony Test Inc"
           Write-Output "##vso[task.setvariable variable=ado_environment;isOutput=true]$ado_environment"
           Write-Host "Environment is $ado_environment"
-          name: Teo
 - stage: Two
   jobs:
   - deployment: B
-  displayName: deploy_to_env
-  pool:
-   vmImage: ubuntu-latest
-   environment: 
-   name: Test
-   strategy:
-    # Default deployment strategy, more coming...
-    runOnce:
-      deploy:
-        steps:
-        - checkout: self 
-        - script: echo my first deployment
+    environment:
+      name: $(ado_environment)
+    variables:
+    - name: varFromA
+      value: $[ stageDependencies.One.A.outputs['test.ado_environment'] ]
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: CmdLine@2
+            inputs:
+              script: echo $(varFromA)
+
