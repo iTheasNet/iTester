@@ -22,7 +22,7 @@ stages:
   - deployment: B
     environment:
       name: teodora
-      resourceType: virtualMachine
+      resourceType: string
     variables:
     - name: varFromA
       value: $[ stageDependencies.One.A.outputs['test.ado_environment'] ]
