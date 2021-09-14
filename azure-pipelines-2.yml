@@ -21,7 +21,7 @@ stages:
   jobs:
   - deployment: B
     environment:
-      name: ts
+      name: teodora
     variables:
     - name: varFromA
       value: $[ stageDependencies.One.A.outputs['test.ado_environment'] ]
