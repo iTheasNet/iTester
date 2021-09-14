@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-    - Development
+    - master
 pool:
   vmImage: ubuntu-latest
 stages:
