@@ -24,7 +24,7 @@ stages:
   displayName: deploy_to_env
   pool:
    vmImage: ubuntu-latest
-   environment: ado_environment
+   environment: 'ado_environment'
    strategy:
       runOnce:
         deploy:
