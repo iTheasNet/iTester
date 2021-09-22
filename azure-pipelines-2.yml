@@ -14,7 +14,7 @@ stages:
       inputs:
         targetType: inline
         script: |
-          $ado_environment = "OneStream Tony Test Inc"
+          $ado_environment = "Teodora"
           Write-Output "##vso[task.setvariable variable=ado_environment;isOutput=true]$ado_environment"
           Write-Host "Environment is $ado_environment"
 - stage: Two
