@@ -21,7 +21,7 @@ stages:
   jobs:
   - deployment: B
     environment:
-      name: teodora
+      name: Teodora
       resourceType: string
     variables:
     - name: varFromA
