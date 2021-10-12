@@ -18,6 +18,7 @@ namespace NUnit.TestsSample
         public void SetupForTest()
         {
             _TestMessage = "Your first passing test.";
+            _TestMessage = "Your first passing test.";
         }
         [Test]
         public void TestMethodAruna()
