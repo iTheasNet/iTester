@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.TestsSample", "NUnit.TestsSample\NUnit.TestsSample.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Nunit.runsettings = Nunit.runsettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTest", "MSTest\MSTest.csproj", "{283D6326-62DA-4BD7-8B85-41A03296E0EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,20 +22,15 @@ Global
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{283D6326-62DA-4BD7-8B85-41A03296E0EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{283D6326-62DA-4BD7-8B85-41A03296E0EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{283D6326-62DA-4BD7-8B85-41A03296E0EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{283D6326-62DA-4BD7-8B85-41A03296E0EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D913D8E-8881-4A99-9DBC-D5A78E3DBC41}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://teodorasms.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = NUnit.TestsSample\\NUnit.TestsSample.csproj
-		SccProjectName1 = NUnit.TestsSample
-		SccLocalPath1 = NUnit.TestsSample
 	EndGlobalSection
 EndGlobal
