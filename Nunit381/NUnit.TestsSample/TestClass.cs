@@ -17,27 +17,27 @@ namespace NUnit.TestsSample
         [SetUp]
         public void SetupForTest()
         {
-            _TestMessage = "Your first passing test1.";
+            _TestMessage = "Your first passing test.";
         }
         [Test]
         public void TestMethodAruna()
         {
             // TODO: Add your test code here
             Assert.Pass(_TestMessage);
-             Assert.Pass(_TestMessage);
+           
         }
         [Test]
         public void TestMethodAruna2()
         {
             // TODO: Add your test code here
             Assert.Pass(_TestMessage);
-             Assert.Pass(_TestMessage);
+          
         }
         [TearDown]
         public void TearDownAfterTest()
         {
             _TestMessage = string.Empty;
-             Assert.Pass(_TestMessage);
+           
         }
     }
 }
