@@ -1,0 +1,10 @@
+C:\Users\teodoras\source\repos\Test_Server_Path_Var\Nunit381\NUnit.TestsSample\bin\Debug\NUnit.TestsSample.dll.config
+C:\Users\teodoras\source\repos\Test_Server_Path_Var\Nunit381\NUnit.TestsSample\bin\Debug\NUnit.TestsSample.dll
+C:\Users\teodoras\source\repos\Test_Server_Path_Var\Nunit381\NUnit.TestsSample\bin\Debug\NUnit.TestsSample.pdb
+C:\Users\teodoras\source\repos\Test_Server_Path_Var\Nunit381\NUnit.TestsSample\bin\Debug\nunit.framework.dll
+C:\Users\teodoras\source\repos\Test_Server_Path_Var\Nunit381\NUnit.TestsSample\bin\Debug\nunit.framework.xml
+C:\Users\teodoras\source\repos\Test_Server_Path_Var\Nunit381\NUnit.TestsSample\obj\Debug\NUnit.TestsSample.csproj.AssemblyReference.cache
+C:\Users\teodoras\source\repos\Test_Server_Path_Var\Nunit381\NUnit.TestsSample\obj\Debug\NUnit.TestsSample.csproj.CoreCompileInputs.cache
+C:\Users\teodoras\source\repos\Test_Server_Path_Var\Nunit381\NUnit.TestsSample\obj\Debug\NUnit.TestsSample.csproj.CopyComplete
+C:\Users\teodoras\source\repos\Test_Server_Path_Var\Nunit381\NUnit.TestsSample\obj\Debug\NUnit.TestsSample.dll
+C:\Users\teodoras\source\repos\Test_Server_Path_Var\Nunit381\NUnit.TestsSample\obj\Debug\NUnit.TestsSample.pdb
