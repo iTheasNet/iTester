@@ -18,6 +18,7 @@ namespace NUnit.TestsSample
         public void SetupForTest()
         {
             _TestMessage = "Your first passing test.";
+            _TestMessage = "Your first passing test.";
            
         }
         [Test]
@@ -25,20 +26,20 @@ namespace NUnit.TestsSample
         {
             // TODO: Add your test code here
             Assert.Pass(_TestMessage);
-            _TestMessage = "Your first passing test.";
+            
         }
         [Test]
         public void TestMethodAruna2()
         {
             // TODO: Add your test code here
             Assert.Pass(_TestMessage);
-           _TestMessage = "Your first passing test.";
+          
         }
         [TearDown]
         public void TearDownAfterTest()
         {
             _TestMessage = string.Empty;
-            _TestMessage = "Your first passing test.";
+            
         }
     }
 }
