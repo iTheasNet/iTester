@@ -1,0 +1,24 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- Master
+
+pool:
+  vmImage: ubuntu-latest
+
+strategy:
+  matrix:
+    ubuntu14:
+      containerImage: ubuntu:14.04
+    ubuntu16:
+      containerImage: ubuntu:16.04
+    ubuntu18:
+      containerImage: ubuntu:18.04
+
+container: $[ variables['containerImage'] ]
+
+steps:
+- script: printenv
