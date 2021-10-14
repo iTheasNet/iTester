@@ -6,7 +6,7 @@
 trigger:
 - Master
 pool:
-  vmImage: 'windows-2019'
+  vmImage: 'locals'
 
 container: mcr.microsoft.com/windows/servercore:ltsc2019
 
