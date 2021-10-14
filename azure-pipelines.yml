@@ -7,7 +7,7 @@ trigger:
 - Master
 
 pool:
-  vmImage: ubuntu-latest
+  name: locals
 
 strategy:
   matrix:
