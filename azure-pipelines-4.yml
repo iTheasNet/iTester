@@ -14,7 +14,7 @@ steps:
 
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '$(solution)'
+    restoreSolution: '$(mytest)'
 
 - task: VSBuild@1
   inputs:
