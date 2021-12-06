@@ -1,0 +1,129 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "azamadf3"
+		},
+		"AZAMAB35_accountKey": {
+			"value": ""
+		},
+		"AZAMAB36_accountKey": {
+			"value": ""
+		},
+		"AzureBlobStorageBPC_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorageVBAP_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorageVBAP2_connectionString": {
+			"value": ""
+		},
+		"AzureDLBlobStorage_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDBDL_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDBWatermark_connectionString": {
+			"value": ""
+		},
+		"AzureSqlLS_connectionString": {
+			"value": ""
+		},
+		"GameReady_GP_connectionString": {
+			"value": ""
+		},
+		"SAPTABLEQS5_password": {
+			"value": ""
+		},
+		"SAPforBPC_password": {
+			"value": ""
+		},
+		"SFDCLinkedService_password": {
+			"value": ""
+		},
+		"SFDCLinkedService_securityToken": {
+			"value": ""
+		},
+		"SapBWTable_password": {
+			"value": ""
+		},
+		"SapBwBPC1_password": {
+			"value": ""
+		},
+		"SapHANAQBW_connectionString": {
+			"value": ""
+		},
+		"SqlServerSD2_connectionString": {
+			"value": ""
+		},
+		"AZAMAB35_properties_typeProperties_url": {
+			"value": "https://azamab35.dfs.core.windows.net"
+		},
+		"AZAMAB36_properties_typeProperties_url": {
+			"value": "https://azamab36.dfs.core.windows.net"
+		},
+		"LSKeyvaultDEVDLBlob_properties_typeProperties_baseUrl": {
+			"value": "https://kv-dev-dl.vault.azure.net/"
+		},
+		"SAPTABLEQS5_properties_typeProperties_clientId": {
+			"value": "500"
+		},
+		"SAPTABLEQS5_properties_typeProperties_userName": {
+			"value": "ASVC_ADF_QA"
+		},
+		"SAPTABLEQS5_properties_typeProperties_server": {
+			"value": "10.160.84.43"
+		},
+		"SAPTABLEQS5_properties_typeProperties_systemNumber": {
+			"value": "01"
+		},
+		"SAPforBPC_properties_typeProperties_clientId": {
+			"value": "500"
+		},
+		"SAPforBPC_properties_typeProperties_userName": {
+			"value": "ASVC_M&A_DBA"
+		},
+		"SAPforBPC_properties_typeProperties_server": {
+			"value": "azama130.internal.aventcorp.com"
+		},
+		"SAPforBPC_properties_typeProperties_systemNumber": {
+			"value": "01"
+		},
+		"SFDCLinkedService_properties_typeProperties_environmentUrl": {
+			"value": "https://login.salesforce.com"
+		},
+		"SFDCLinkedService_properties_typeProperties_username": {
+			"value": "ASVC_QLK_DBA_PROD@avanos.com"
+		},
+		"SapBWTable_properties_typeProperties_clientId": {
+			"value": "100"
+		},
+		"SapBWTable_properties_typeProperties_userName": {
+			"value": "901486"
+		},
+		"SapBWTable_properties_typeProperties_server": {
+			"value": "10.160.84.23"
+		},
+		"SapBWTable_properties_typeProperties_systemNumber": {
+			"value": "01"
+		},
+		"SapBwBPC1_properties_typeProperties_server": {
+			"value": "azama130.internal.aventcorp.com"
+		},
+		"SapBwBPC1_properties_typeProperties_systemNumber": {
+			"value": "01"
+		},
+		"SapBwBPC1_properties_typeProperties_clientId": {
+			"value": "500"
+		},
+		"SapBwBPC1_properties_typeProperties_userName": {
+			"value": "ASVC_M&A_DBA"
+		},
+		"IR-SAP-QA_properties_typeProperties_linkedInfo_resourceId": {
+			"value": "/subscriptions/483bd7a6-e04f-42fa-8005-f6ce84c67a7f/resourcegroups/AZAMRG35/providers/Microsoft.DataFactory/factories/azamadf1/integrationruntimes/IR-SAP-QA"
+		}
+	}
+}
