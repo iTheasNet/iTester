@@ -20,6 +20,7 @@ steps:
       !**/bin/**/*Tests.pdb
     SymbolServerType: 'TeamServices'
     TreatNotIndexedAsWarning: true
-   
+    testResultsFiles: /export/opt/RAP/fi_devops_svc/test-results/**/*.xml
+
 
 
