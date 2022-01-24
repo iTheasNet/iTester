@@ -21,7 +21,7 @@ steps:
 
 - task: DownloadSecureFile@1
   inputs:
-    secureFile: '$(dsf)'
+    secureFile: 'Test_Server_Path_Var (1)'
     
 - task: PowerShell@2
   inputs:
