@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 trigger:
-- Master
+- none
 pool:
   vmImage: 'locals'
 
