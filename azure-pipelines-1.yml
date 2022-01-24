@@ -19,8 +19,8 @@ steps:
   displayName: 'Run a multi-line script'
   
   - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See $(Build.DefinitionName)
+    
+    Write-Output:  $(Build.DefinitionName)
   displayName: 'Run a multi-line script'
 
 - task: DownloadSecureFile@1
