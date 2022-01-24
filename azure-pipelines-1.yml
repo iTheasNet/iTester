@@ -22,3 +22,11 @@ steps:
 - task: DownloadSecureFile@1
   inputs:
     secureFile: '$(dsf)'
+    
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      
+      Write-Host $(Build.DefinitionName)
