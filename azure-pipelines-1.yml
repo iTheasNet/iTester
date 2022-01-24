@@ -18,10 +18,6 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
   
-  - script: |
-    
-    Write-Output:  $(Build.DefinitionName)
-  displayName: 'Run a multi-line script'
 
 - task: DownloadSecureFile@1
   inputs:
