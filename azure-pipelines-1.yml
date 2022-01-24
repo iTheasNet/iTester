@@ -20,4 +20,4 @@ steps:
 
 - task: DownloadSecureFile@1
   inputs:
-    secureFile: 'Teodora.txt'
+    secureFile: '$(dsf)'
