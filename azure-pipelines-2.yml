@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 steps:
     - checkout: self
-    - task: octopusdeploy.octopus-deploy-build-release-tasks.octo-installer.OctoInstaller@4
-      displayName: 'Use Octopus CLI tool version latest'
-      inputs: 
-      version: latest
+    -
+- task: OctoInstaller@4
+  inputs:
+    version: 'latest'
