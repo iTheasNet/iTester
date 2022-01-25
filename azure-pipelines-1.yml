@@ -30,6 +30,6 @@ steps:
       # Write your PowerShell commands here.
       
       Write-Host $(Build.DefinitionName)
-- task: OctoInstaller@4
+- task: octopusdeploy.octopus-deploy-build-release-tasks.octo-installer.OctoInstaller@4
   inputs:
     version: 'latest'
