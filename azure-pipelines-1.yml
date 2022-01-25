@@ -32,5 +32,5 @@ steps:
       Write-Host $(Build.DefinitionName)
 - task: octopusdeploy.octopus-deploy-build-release-tasks.octo-installer.OctoInstaller@4
   displayName: 'Use Octopus CLI tool version latest' 
-  inputs:
+  inputs:''
     version: 'latest'
