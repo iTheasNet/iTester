@@ -11,5 +11,6 @@ steps:
     - checkout: self
     -
 - task: octopusdeploy.octopus-deploy-build-release-tasks.octo-installer.OctoInstaller@4
-  displayName: 'Use Octopus CLI tool version latest'
-     version: latest
+  displayName: 'Use Octopus CLI tool version latest' 
+  inputs:
+    version: 'latest'
