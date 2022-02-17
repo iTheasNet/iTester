@@ -8,6 +8,8 @@ schedules:
   branches:
     include:
     - master3
+    - master
+    
   
     exclude:
     - releases/ancient/*
