@@ -8,9 +8,6 @@ schedules:
   branches:
     include:
     - master
-  
-    exclude:
-    - releases/ancient/*
 - cron: "0 12 * * 0"
   displayName: Weekly Sunday build
   branches:
