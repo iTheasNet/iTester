@@ -17,7 +17,8 @@ schedules:
     include:
     - master
   always: true
-trigger:
+trigger: none
+pr:none
 - master
 
 pool:
