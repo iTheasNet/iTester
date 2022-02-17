@@ -16,6 +16,7 @@ schedules:
   branches:
     include:
     - master
+    - master3
   always: true
 trigger:
 - master
