@@ -16,7 +16,8 @@ schedules:
   displayName: Weekly Sunday build
   branches:
     include:
-    - master
+    - master 
+    - master3
   always: true
 trigger: none
 
